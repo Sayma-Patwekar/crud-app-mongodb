@@ -8,11 +8,16 @@ const path = require('path');
 
 const app = express();
 
+const connectDB = require('./server/database/connection');
+
 dotenv.config({path : 'config.env'});
 const PORT = process.env.PORT || 8080; // run on port defined in config.evn file if port no. is not found then run server on port 8080(as default)
 
 //log requests : morgan module allows to log the requests on the console whenever we make a request
 app.use(morgan('tiny'));
+
+//mongodb connection
+connectDB();
 
 //parse request to body-parseer
 app.use(bodyparser.urlencoded({extended:true})); //
